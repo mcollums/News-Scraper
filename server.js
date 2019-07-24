@@ -65,6 +65,20 @@ app.get("/scrape", function(req, res){
     res.send("Scrape Complete");
 });
 
+//Route to display all articles from the DB
+app.get("/articles", function(req, res) {
+    // Grab every document in the Articles collection
+    db.Article.find({})
+      .then(function(dbArticle) {
+        // If we were able to successfully find Articles, send them back to the client
+        res.json(dbArticle);
+      })
+      .catch(function(err) {
+        // If an error occurred, send it to the client
+        res.json(err);
+      });
+  });
+
 //route to save an article
 //route to list all saved articles
 //route to save a note on a saved article
