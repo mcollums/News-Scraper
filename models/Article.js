@@ -10,6 +10,10 @@ var ArticleSchema = new Schema({
         type: String,
         required: true
     },
+    date: {
+        type: String,
+        required: true
+    },
     //"Link" is required and is a string
     link: {
         type: String,

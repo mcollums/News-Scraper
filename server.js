@@ -25,7 +25,7 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // Connect to the Mongo DB
-mongoose.connect("mongodb://localhost/unit18Populater", { useNewUrlParser: true });
+mongoose.connect("mongodb://localhost/hw_scraper", { useNewUrlParser: true });
 
 
 app.get("/", function(req,res){
@@ -36,13 +36,35 @@ app.get("/", function(req,res){
 app.get("/scrape", function(req, res){
     axios.get("https://editorial.rottentomatoes.com/").then(function (response) {
         var $ = cheerio.load(response.data);
-        var results = [];
+
         $("a.articleLink").each(function(i, element){
-            console.log(element);
+            //Make a new object for each result from the articleLinks
+            var result = {};
+
+            result.title = $(element).find("p.title").text().trim();
+            result.date = $(element).find("p.publication-date").text().trim();
+            result.link = $(element).attr("href").trim();
+            result.image = $(element).find(".editorialColumnPic").find("img").attr("src").trim();
+            // console.log(result);
+
+            //Add each result to the database
+            db.Article.create(result).then(function(dbArticle) {
+                console.log(dbArticle);
+            }).catch(function(err){
+                console.log(err);
+            });
+
+            // console.log("=====================================");
+            // console.log(title);
+            // console.log(date);
+            // console.log(link);
+            // console.log(image);
+            // console.log("=====================================");
         });
     });
     res.send("Scrape Complete");
 });
+
 //route to save an article
 //route to list all saved articles
 //route to save a note on a saved article
