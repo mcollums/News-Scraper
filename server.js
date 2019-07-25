@@ -30,6 +30,10 @@ mongoose.connect("mongodb://localhost/hw_scraper", { useNewUrlParser: true });
 
 app.get("/", function(req,res){
     res.send("Hello World");
+});
+
+app.get("/saved", function(req, res){
+    res.send("Saved Articles Page");
 })
 //function to scrape NYT and get title, URL and description
 //route to list all scraped headlines
@@ -79,12 +83,19 @@ app.get("/articles", function(req, res) {
       });
   });
 
+//route to  delete a note
+app.delete("/clear", function(req, res){ 
+    db.Article.remove({}, function(err) { 
+        console.log('collection removed'); 
+     });
+});
+
 //route to save an article
 //route to list all saved articles
 //route to save a note on a saved article
 //route to edit a note
-//route to  delete a note
 //route to unsave a note
+
 
 // Start the server
 app.listen(PORT, function() {
