@@ -1,47 +1,57 @@
 var express = require("express");
-var logger = require("morgan");
+var cheerio = require("cheerio");
+var axios = require("axios");
 var mongoose = require("mongoose");
 
-//Getting Web Scraper 
-var axios = require("axios");
-var cheerio = require("cheerio");
+var PORT = process.env.PORT || 3000;
 
-//Requiring models
+// require models
 var db = require("./models");
 
-var PORT = 3001;
-
-// Initialize Express
+// initialize express
 var app = express();
 
-// Configure middleware
-
-// Use morgan logger for logging requests
-app.use(logger("dev"));
-// Parse request body as JSON
+// middleware
+// parse body as json
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-// Make public a static folder
+// make public a static folder
 app.use(express.static("public"));
 
-// Connect to the Mongo DB
-mongoose.connect("mongodb://localhost/hw_scraper", { useNewUrlParser: true });
+// handlebars
+var exphbs = require("express-handlebars");
+app.engine("handlebars", exphbs({
+    defaultLayout: "main"
+}));
+app.set("view engine", "handlebars");
 
+// connect to mongo db
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+mongoose.connect(MONGODB_URI);
+var db = mongoose.connection;
 
-app.get("/", function(req,res){
-    res.send("Hello World");
+db.on("error", function (error) {
+    console.log("Mongoose error: ", error);
 });
 
-app.get("/saved", function(req, res){
-    res.send("Saved Articles Page");
-})
-//function to scrape NYT and get title, URL and description
-//route to list all scraped headlines
-app.get("/scrape", function(req, res){
+db.once("open", function () {
+    console.log("Mongoose connection successful.");
+});
+
+
+//===========================================================
+
+// app.get("/saved", function(req, res){
+//     res.send("Saved Articles Page");
+// });
+
+//function to scrape Rotten Tomatoes and get title, URL and description
+// //route to list all scraped headlines
+app.get("/scrape", function (req, res) {
     axios.get("https://editorial.rottentomatoes.com/").then(function (response) {
         var $ = cheerio.load(response.data);
 
-        $("a.articleLink").each(function(i, element){
+        $("a.articleLink").each(function (i, element) {
             //Make a new object for each result from the articleLinks
             var result = {};
 
@@ -51,10 +61,24 @@ app.get("/scrape", function(req, res){
             result.image = $(element).find(".editorialColumnPic").find("img").attr("src").trim();
             // console.log(result);
 
+            db.Article.find({}).then(function (dbArticle) {
+                console.log(chalk.blue(dbArticle));
+                dbArticle.forEach(function (obj) {
+                    if (obj.title !== result.title) {
+                        //Add each result to the database
+                        db.Article.create(result).then(function (newArticle) {
+                            console.log(chalk.red(newArticle));
+                        }).catch(function (err) {
+                            console.log(err);
+                        });
+                    }
+                })
+            })
+
             //Add each result to the database
-            db.Article.create(result).then(function(dbArticle) {
+            db.Article.create(result).then(function (dbArticle) {
                 // console.log(dbArticle);
-            }).catch(function(err){
+            }).catch(function (err) {
                 console.log(err);
             });
 
@@ -70,7 +94,7 @@ app.get("/scrape", function(req, res){
 });
 
 //Route to display all articles from the DB
-app.get("/articles", function(req, res) {
+app.get("/articles/all", function(req, res) {
     // Grab every document in the Articles collection
     db.Article.find({})
       .then(function(dbArticle) {
@@ -84,7 +108,7 @@ app.get("/articles", function(req, res) {
   });
 
 //route to  delete a note
-app.delete("/clear", function(req, res){ 
+app.delete("/clear/all", function(req, res){ 
     db.Article.remove({}, function(err) { 
         console.log('collection removed'); 
      });
@@ -98,6 +122,6 @@ app.delete("/clear", function(req, res){
 
 
 // Start the server
-app.listen(PORT, function() {
+app.listen(PORT, function () {
     console.log("App running on port " + PORT + "!");
-  });
+});
