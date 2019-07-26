@@ -1,7 +1,11 @@
 var displayData = function (data) {
     for (var i = 0; i < data.length; i++) {
+        var favButton = `<button class="favBtn" type="button" id=${data[i]._id}> Add to Favorites </button> `;
+        var noteButton = `<button class="noteBtn" type="button" id=${data[i]._id}> Add a Note </button> `;
+
         // Display the apropos information on the page
-        $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "<br />" + data[i].date + "<br />" + data[i].image + "</p>");
+        $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title +
+            "<br />" + data[i].link + "<br />" + data[i].date + "<br />" + data[i].image + "<br />" + favButton + "<br />" + noteButton + "</p>");
     }
 }
 
@@ -10,43 +14,59 @@ $.getJSON("/articles", function (data) {
     displayData(data);
 });
 
-$("#scrapeBtn").click(function () {
-    console.log("I've been clicked");
+$(document).ready(function () {
+    $("#scrapeBtn").click(function () {
+        console.log("I've been clicked");
 
-    $.ajax({
-        method: "GET",
-        url: "/scrape",
-        success: function (data) {
-            if (data.success == true) { // if true (1)
-                setTimeout(function () {// wait for 5 secs(2)
-                    location.reload(); // then reload the page.(3)
-                }, 5000);
+        $.ajax({
+            method: "GET",
+            url: "/scrape",
+            success: function (data) {
+                if (data.success == true) { // if true (1)
+                    setTimeout(function () {// wait for 5 secs(2)
+                        location.reload(); // then reload the page.(3)
+                    }, 5000);
+                }
             }
-        }
-    }).then(function (data) {
-        displayData(data);
-    }).catch(function (err) {
-        res.json(err);
+        }).then(function (data) {
+            displayData(data);
+        }).catch(function (err) {
+            res.json(err);
+        });
+
+        location.reload();
     });
 
-    location.reload();
-});
-
-$("#clearBtn").click(function () {
-    $.ajax({
-        method: "DELETE",
-        url: "/clear",
-        success: function (data) {
-            if (data.success == true) { // if true (1)
-                setTimeout(function () {// wait for 5 secs(2)
-                    location.reload(); // then reload the page.(3)
-                }, 5000);
+    $("#clearBtn").click(function () {
+        $.ajax({
+            method: "DELETE",
+            url: "/clear",
+            success: function (data) {
+                if (data.success == true) { // if true (1)
+                    setTimeout(function () {// wait for 5 secs(2)
+                        location.reload(); // then reload the page.(3)
+                    }, 5000);
+                }
             }
-        }
-    }).then(function (data) {
-        displayData(data);
-    }).catch(function (err) {
-        res.json(err);
+        }).then(function (data) {
+            displayData(data);
+        }).catch(function (err) {
+            res.json(err);
+        });
+        location.reload();
     });
-    location.reload();
+
+
+    $("#articles").on("click", ".favBtn", function () {
+        console.log("Favorite Button Clicked");
+        const articleId = $(".favBtn").attr("id");
+        console.log("FavId: " + articleId);
+    });
+
+    $("#articles").on("click", ".noteBtn", function () {
+        console.log("Note Button Clicked");
+        const articleId = $(".favBtn").attr("id");
+        console.log("AricleId: " + articleId);
+    });
+
 });

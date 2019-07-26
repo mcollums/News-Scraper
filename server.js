@@ -53,7 +53,7 @@ app.get("/scrape", function(req, res){
 
             //Add each result to the database
             db.Article.create(result).then(function(dbArticle) {
-                console.log(dbArticle);
+                // console.log(dbArticle);
             }).catch(function(err){
                 console.log(err);
             });
