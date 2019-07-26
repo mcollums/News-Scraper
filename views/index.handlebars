@@ -1,0 +1,29 @@
+{{!-- Jumbotron Fluid --}}
+<div class="jumbotron jumbotron-fluid">
+    <div class="container text-center">
+        <h1 class="display-4">Rotten Tomatoes Scraper</h1>
+        <p class="lead">Scrape articles from Rotten Tomates, save your favorites and make notes!</p>
+    </div>
+</div>
+
+{{!-- Main Body  --}}
+<div class="container-fluid" id="main-cont">
+
+    {{!-- Button Row --}}
+    <div class="row justify-content-center" id="btn-row">
+        <div class="col-6 text-center" id="btn-col">
+            <button type="button" id="scrapeBtn" class="btn btn-lg btn-primary">Scrape Articles</button>
+            <button type="button" id="clearBtn" class="btn btn-lg btn-primary">Clear Articles</button>
+        </div>
+    </div>
+
+    {{!-- Articles/Notes Section --}}
+    <div class="row" id="article-row">
+        <div class="col-5" id="articles">
+
+        </div>
+        <div class="col-7" id="notes">
+
+        </div>
+    </div>
+</div>
