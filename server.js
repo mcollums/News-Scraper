@@ -1,9 +1,11 @@
+// START SERVER REQUIREMENTS
+//===========================================================
 var express = require("express");
 var cheerio = require("cheerio");
 var axios = require("axios");
 var mongoose = require("mongoose");
 
-var PORT = process.env.PORT || 3000;
+var PORT = process.env.PORT || 3001;
 
 // require models
 var db = require("./models");
@@ -26,25 +28,40 @@ app.engine("handlebars", exphbs({
 app.set("view engine", "handlebars");
 
 // connect to mongo db
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/hw_scraper";
 mongoose.connect(MONGODB_URI);
-var db = mongoose.connection;
+var dbMon = mongoose.connection;
 
-db.on("error", function (error) {
+dbMon.on("error", function (error) {
     console.log("Mongoose error: ", error);
 });
 
-db.once("open", function () {
+dbMon.once("open", function () {
     console.log("Mongoose connection successful.");
 });
 
 
+// START API CALLS
 //===========================================================
+// =============IEW CALLS============
+app.get("/", function (req, res) {
+    // Grab every document in the Articles collection
+    db.Article.find({})
+    .then(function (dbArticle) {
+        console.log()
+        // If we were able to successfully find Articles, send them back to the client
+        hbsObject = {
+            article: dbArticle
+        }
+        res.render("index", hbsObject);
 
-// app.get("/saved", function(req, res){
-//     res.send("Saved Articles Page");
-// });
+    }).catch(function (err) {
+        // If an error occurred, send it to the client
+        res.json(err);
+    });
+});
 
+// Database Calls================
 //function to scrape Rotten Tomatoes and get title, URL and description
 // //route to list all scraped headlines
 app.get("/scrape", function (req, res) {
