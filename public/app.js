@@ -64,7 +64,7 @@
 
     $("#articles").on("click", ".favBtn", function () {
         console.log("Favorite Button Clicked");
-        const articleId = $(".favBtn").attr("id");
+        const articleId = $(".favBtn").attr("data-id");
         console.log("FavId: " + articleId);
 
 

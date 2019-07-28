@@ -29,6 +29,11 @@ var ArticleSchema = new Schema({
     note: {
         type: Schema.Types.ObjectId,
         ref: "Note"
+    },
+    favorite: {
+        type: Boolean,
+        required: false,
+        default: false
     }
 });
 

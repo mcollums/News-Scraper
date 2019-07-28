@@ -49,18 +49,18 @@ dbMon.once("open", function () {
 app.get("/", function (req, res) {
     // Grab every document in the Articles collection
     db.Article.find({})
-    .then(function (dbArticle) {
-        console.log()
-        // If we were able to successfully find Articles, send them back to the client
-        hbsObject = {
-            article: dbArticle
-        }
-        res.render("index", hbsObject);
+        .then(function (dbArticle) {
+            console.log()
+            // If we were able to successfully find Articles, send them back to the client
+            hbsObject = {
+                article: dbArticle
+            }
+            res.render("index", hbsObject);
 
-    }).catch(function (err) {
-        // If an error occurred, send it to the client
-        res.json(err);
-    });
+        }).catch(function (err) {
+            // If an error occurred, send it to the client
+            res.json(err);
+        });
 });
 
 // Database Calls================
@@ -115,28 +115,37 @@ app.get("/scrape", function (req, res) {
 
 
 //Route to display all articles from the DB
-app.get("/articles/all", function(req, res) {
+app.get("/articles/all", function (req, res) {
     // Grab every document in the Articles collection
     db.Article.find({})
-      .then(function(dbArticle) {
-        // If we were able to successfully find Articles, send them back to the client
-        res.json(dbArticle);
-      })
-      .catch(function(err) {
-        // If an error occurred, send it to the client
-        res.json(err);
-      });
-  });
+        .then(function (dbArticle) {
+            // If we were able to successfully find Articles, send them back to the client
+            res.json(dbArticle);
+        })
+        .catch(function (err) {
+            // If an error occurred, send it to the client
+            res.json(err);
+        });
+});
 
 
 //route to  delete a note
-app.delete("/clear/all", function(req, res){ 
-    db.Article.remove({}, function(err) { 
-        console.log('collection removed'); 
-     });
+app.delete("/clear/all", function (req, res) {
+    db.Article.remove({}, function (err) {
+        console.log('collection removed');
+    });
 });
 
 //route to save an article
+app.put("/favorite/:id", function (req, res) {
+    console.log(req.params.id + " BEING UPDATED");
+    db.Article.findOneAndUpdate({ _id: req.params.id }, { favorite: true }, { new: true })
+    .catch(function (err) {
+        res.json(err);
+    });
+    res.status(200);
+});
+
 //route to list all saved articles
 //route to save a note on a saved article
 //route to edit a note
