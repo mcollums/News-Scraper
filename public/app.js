@@ -81,6 +81,15 @@
     $("#articles").on("click", ".noteBtn", function () {
         $("#notes").show();
         console.log("Note Button Clicked");
-        const articleId = $(".favBtn").attr("id");
+        const articleTitle = $(this).attr("data-title");
+        console.log("AricleTitle: " + articleTitle);
+        const articleId = $(this).attr("data-id");
         console.log("AricleId: " + articleId);
+
+        $("#note-heading").text("Make a Note For " + articleTitle);
+        $("#submitNoteBtn").attr("data-id", articleId);
     });
+
+    $("#submitNoteBtn").on("click", function(){
+
+    })

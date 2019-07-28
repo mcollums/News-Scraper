@@ -28,7 +28,8 @@
                     <p class="card-text">{{ this.date }}</p>
                     <a href="{{ this.link }}" class="btn btn-sm text-light btn-primary">Read on RT</a>
                     <a data-id="{{ this._id }}" class="btn btn-sm text-light btn-primary favBtn">Add to Favorites</a>
-                    <a data-title="{{ this.title }}" id="{{ this._id }}" class="btn btn-sm text-light btn-primary noteBtn">Add a Note</a>
+                    <a data-title="{{ this.title }}" data-id="{{ this._id }}"
+                        class="btn btn-sm text-light btn-primary noteBtn">Add a Note</a>
                 </div>
             </div>
             {{/each}}
@@ -36,13 +37,13 @@
         <div class="col-4" id="notes">
             <div class="row" id="note-row">
                 <div id="note-col" class="col-9">
-                    <h2 id="note-heading">Make a Note about this article</h2>
+                    <h2 id="note-heading"></h2>
                     <form action="submit">
                         <div class="form-group">
                             <label for="note-text-area">Write your Note Here...</label>
-                            <textarea class="form-control" id="note-text-area" rows="3"></textarea>
+                            <textarea class="form-control" id="note-text-area" rows="5"></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button id="submitNoteBtn" type="submit" class="btn btn-primary">Submit</button>
                     </form>
                 </div>
             </div>

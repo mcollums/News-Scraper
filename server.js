@@ -138,7 +138,7 @@ app.delete("/clear/all", function (req, res) {
 
 //route to save an article
 app.put("/favorite/:id", function (req, res) {
-    console.log(req.params.id + " BEING UPDATED");
+    console.log(chalk.green(req.params.id + " BEING UPDATED"));
     db.Article.findOneAndUpdate({ _id: req.params.id }, { favorite: true }, { new: true })
     .catch(function (err) {
         res.json(err);
