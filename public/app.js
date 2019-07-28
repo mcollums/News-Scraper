@@ -78,18 +78,40 @@
         });
     });
 
+    //When the user clicks to add a note for an article...
     $("#articles").on("click", ".noteBtn", function () {
+        //The notes section shows up
         $("#notes").show();
-        console.log("Note Button Clicked");
+        // console.log("Note Button Clicked");
+        //Adding variables to the notes section to use later in API calls
         const articleTitle = $(this).attr("data-title");
-        console.log("AricleTitle: " + articleTitle);
+        // console.log("AricleTitle: " + articleTitle);
         const articleId = $(this).attr("data-id");
-        console.log("AricleId: " + articleId);
-
+        // console.log("AricleId: " + articleId);
+        //Adding note heading from Article Title and articleID to the submit button
         $("#note-heading").text("Make a Note For " + articleTitle);
         $("#submitNoteBtn").attr("data-id", articleId);
     });
 
     $("#submitNoteBtn").on("click", function(){
+        event.preventDefault();
+        console.log("Note Submit Clicked");
+        const articleId = $(this).attr("data-id");
+        console.log("SUBMIT BTN ARTICLEID " + articleId);
 
-    })
+        const newNote = $("#note-text-area").val().trim();
+        console.log("NOTE AREA " + newNote);
+
+        $.ajax({
+            method: "POST",
+            url: "/note/" + articleId,
+            data: { body: newNote }
+        }).then(function(data){
+            console.log("ADD NOTE REQUEST " + data);
+            $("#note-heading").empty();
+            $("#note-text-area").val("");
+            $("#notes").hide();
+        }).catch(function(err){
+            res.json(err);
+        })
+    });
