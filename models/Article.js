@@ -26,13 +26,13 @@ var ArticleSchema = new Schema({
     },
     //Note is an object that stores the Note Id
     //
-    note: {
+    notes: [{
         type: Schema.Types.ObjectId,
-        ref: "Note"
-    },
+        ref: "note"
+    }],
+
     favorite: {
         type: Boolean,
-        required: false,
         default: false
     }
 });

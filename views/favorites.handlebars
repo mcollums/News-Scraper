@@ -1,0 +1,71 @@
+{{!-- Jumbotron Fluid --}}
+<div class="jumbotron jumbotron-fluid">
+    <div class="container text-center">
+        <h1 class="display-4">Your Favorite Articles</h1>
+        <p class="lead">View your favorite articles and make/edit notes</p>
+    </div>
+</div>
+
+{{!-- Main Body  --}}
+<div class="container-fluid" id="main-cont">
+
+    {{!-- Button Row --}}
+    {{!-- <div class="row justify-content-center" id="btn-row">
+        <div class="col-6 text-center" id="btn-col">
+            <button type="button" href="/scrape" id="scrapeBtn" class="btn btn-lg btn-primary">Scrape Articles</button>
+            <button type="button" href="/clear/all" id="clearBtn" class="btn btn-lg btn-primary">Clear Articles</button>
+        </div>
+    </div> --}}
+
+    {{!-- Articles/Notes Section --}}
+    <div class="row" id="article-row">
+        <div class="col-8" id="articles">
+            {{#each article}}
+            <div class="card article-card" style="width: 24rem;">
+                <img class="card-img-top" src="{{ this.image }}" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">{{ this.title }}</h5>
+                    <p class="card-text">{{ this.date }}</p>
+                    <a href="{{ this.link }}" class="btn btn-sm text-light btn-primary">Read on RT</a>
+                    <a data-id="{{ this._id }}" class="btn btn-sm text-light btn-primary unfavBtn">Remove from
+                        Favorites</a>
+                    <a data-title="{{ this.title }}" data-id="{{ this._id }}"
+                        class="btn btn-sm text-light btn-primary viewNoteBtn">View Notes</a>
+                    <a data-title="{{ this.title }}" data-id="{{ this._id }}"
+                        class="btn btn-sm text-light btn-primary addNoteBtn">Add Notes</a>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+        <div class="col-4 note-section" id="viewnotes">
+            <div class="row note-row" id="view-note-row">
+                <div id="note-col" class="col-9">
+                    {{!-- <h2 id="note-heading"></h2> --}}
+                    <form action="submit">
+                        <div class="form-group">
+                            <label for="note-text-area">Write your Note Here...</label>
+                            <textarea class="form-control" id="note-text-area" rows="5"></textarea>
+                        </div>
+                        <button id="submitNoteBtn" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-4 note-section" id="addnotes">
+        <div class="row note-row" id="add-note-row">
+            <div id="note-col" class="col-9">
+                <h2 id="note-heading"></h2>
+                <form action="submit">
+                    <div class="form-group">
+                        <label for="note-text-area">Write your Note Here...</label>
+                        <textarea class="form-control" id="note-text-area" rows="5"></textarea>
+                    </div>
+                    <button id="submitNoteBtn" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<script type="text/javascript" src="/favorites.js"></script>
