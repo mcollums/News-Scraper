@@ -50,7 +50,6 @@ app.get("/", function (req, res) {
     // Grab every document in the Articles collection
     db.Article.find({})
         .then(function (dbArticle) {
-            console.log()
             // If we were able to successfully find Articles, send them back to the client
             hbsObject = {
                 article: dbArticle
@@ -61,6 +60,19 @@ app.get("/", function (req, res) {
             // If an error occurred, send it to the client
             res.json(err);
         });
+});
+
+app.get("/favorites", function (req, res) {
+    db.Article.find({
+        favorite: true
+    }).then(function (dbArticle) {
+        hbsObject = {
+            article: dbArticle
+        }
+        res.render("favorites", hbsObject);
+    }).catch(function(err){
+        res.json(err);
+    })
 });
 
 // Database Calls================
@@ -138,6 +150,16 @@ app.delete("/clear/all", function (req, res) {
 
 //route to save an article
 app.put("/favorite/:id", function (req, res) {
+    console.log(chalk.green(req.params.id + " BEING UPDATED"));
+    db.Article.findOneAndUpdate({ _id: req.params.id }, { favorite: true }, { new: true })
+        .catch(function (err) {
+            res.json(err);
+        });
+    res.status(200);
+});
+
+//route to save an article
+app.put("/unfavorite/:id", function (req, res) {
     console.log(chalk.green(req.params.id + " BEING UPDATED"));
     db.Article.findOneAndUpdate({ _id: req.params.id }, { favorite: true }, { new: true })
         .catch(function (err) {
