@@ -4,6 +4,8 @@ var express = require("express");
 var cheerio = require("cheerio");
 var axios = require("axios");
 var mongoose = require("mongoose");
+var chalk = require("chalk");
+
 
 var PORT = process.env.PORT || 3001;
 
@@ -76,21 +78,22 @@ app.get("/scrape", function (req, res) {
             result.date = $(element).find("p.publication-date").text().trim();
             result.link = $(element).attr("href").trim();
             result.image = $(element).find(".editorialColumnPic").find("img").attr("src").trim();
-            // console.log(result);
+            // console.log(chalk.green(result));
 
-            db.Article.find({}).then(function (dbArticle) {
-                console.log(chalk.blue(dbArticle));
-                dbArticle.forEach(function (obj) {
-                    if (obj.title !== result.title) {
-                        //Add each result to the database
-                        db.Article.create(result).then(function (newArticle) {
-                            console.log(chalk.red(newArticle));
-                        }).catch(function (err) {
-                            console.log(err);
-                        });
-                    }
-                })
-            })
+            // db.Article.find({ title:result.title }).then(function (dbArticle) {
+            //     // if(dbArticle)
+            //     // console.log(chalk.blue(dbArticle));
+            //     // dbArticle.forEach(function (obj) {
+            //     //     if (obj.title != result.title) {
+            //     //         //Add each result to the database
+            //     //         db.Article.create(result).then(function (newArticle) {
+            //     //             console.log(chalk.red(newArticle));
+            //     //         }).catch(function (err) {
+            //     //             console.log(err);
+            //     //         });
+            //     //     }
+            //     // })
+            // })
 
             //Add each result to the database
             db.Article.create(result).then(function (dbArticle) {
@@ -110,6 +113,7 @@ app.get("/scrape", function (req, res) {
     res.send("Scrape Complete");
 });
 
+
 //Route to display all articles from the DB
 app.get("/articles/all", function(req, res) {
     // Grab every document in the Articles collection
@@ -123,6 +127,7 @@ app.get("/articles/all", function(req, res) {
         res.json(err);
       });
   });
+
 
 //route to  delete a note
 app.delete("/clear/all", function(req, res){ 

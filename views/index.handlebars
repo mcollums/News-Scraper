@@ -21,14 +21,14 @@
     <div class="row" id="article-row">
         <div class="col-8" id="articles">
             {{#each article}}
-            <div class="card article-card" style="width: 20rem;">
+            <div class="card article-card" style="width: 24rem;">
                 <img class="card-img-top" src="{{ this.image }}" alt="Card image cap">
                 <div class="card-body">
                     <h5 class="card-title">{{ this.title }}</h5>
                     <p class="card-text">{{ this.date }}</p>
                     <a href="{{ this.link }}" class="btn btn-sm text-light btn-primary">Read on RT</a>
-                    <a id="{{ this._id }}" class="btn btn-sm text-light btn-primary">Add to Favorites</a>
-                    <a data-title="{{ this.title }}" id="{{ this._id }}" class="btn btn-sm text-light btn-primary">Add a Note</a>
+                    <a data-id="{{ this._id }}" class="btn btn-sm text-light btn-primary favBtn">Add to Favorites</a>
+                    <a data-title="{{ this.title }}" id="{{ this._id }}" class="btn btn-sm text-light btn-primary noteBtn">Add a Note</a>
                 </div>
             </div>
             {{/each}}

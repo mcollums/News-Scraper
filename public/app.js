@@ -15,6 +15,9 @@
 // });
 
 // $(document).ready(function () {
+    $("#notes").hide();
+// });
+
     $("#scrapeBtn").click(function () {
         event.preventDefault();
         console.log("I've been clicked");
@@ -63,12 +66,21 @@
         console.log("Favorite Button Clicked");
         const articleId = $(".favBtn").attr("id");
         console.log("FavId: " + articleId);
+
+
+        $.ajax({
+            method: "PUT",
+            url: "/favorite/" + articleId
+        }).then(function(data){
+            console.log("FAVORITES POST REQUEST: " + data );
+        }).catch(function(err){
+            res.json(err);
+        });
     });
 
     $("#articles").on("click", ".noteBtn", function () {
+        $("#notes").show();
         console.log("Note Button Clicked");
         const articleId = $(".favBtn").attr("id");
         console.log("AricleId: " + articleId);
     });
-
-// });
