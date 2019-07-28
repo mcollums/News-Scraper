@@ -158,10 +158,10 @@ app.put("/favorite/:id", function (req, res) {
     res.status(200);
 });
 
-//route to save an article
-app.put("/unfavorite/:id", function (req, res) {
+//route to unsave an article
+app.post("/unfavorite/:id", function (req, res) {
     console.log(chalk.green(req.params.id + " BEING UPDATED"));
-    db.Article.findOneAndUpdate({ _id: req.params.id }, { favorite: true }, { new: true })
+    db.Article.findOneAndUpdate({ _id: req.params.id }, { favorite: false }, { new: true })
         .catch(function (err) {
             res.json(err);
         });

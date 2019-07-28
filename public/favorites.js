@@ -13,7 +13,9 @@ $("#articles").on("click", ".unfavBtn", function () {
     }).then(function(data){
         console.log("UNFAVORITES POST REQUEST: " + data );
     }).catch(function(err){
-        res.json(err);
+        // res.json(err);
+        if (err) throw err;
+
     });
 });
 
