@@ -45,7 +45,7 @@ dbMon.once("open", function () {
 
 // START API CALLS
 //===========================================================
-// =============IEW CALLS============
+// =============VIEW CALLS============
 app.get("/", function (req, res) {
     // Grab every document in the Articles collection
     db.Article.find({})
@@ -70,12 +70,12 @@ app.get("/favorites", function (req, res) {
             article: dbArticle
         }
         res.render("favorites", hbsObject);
-    }).catch(function(err){
+    }).catch(function (err) {
         res.json(err);
     })
 });
 
-// Database Calls================
+// =================Database Calls================
 //function to scrape Rotten Tomatoes and get title, URL and description
 // //route to list all scraped headlines
 app.get("/scrape", function (req, res) {
@@ -92,37 +92,31 @@ app.get("/scrape", function (req, res) {
             result.image = $(element).find(".editorialColumnPic").find("img").attr("src").trim();
             // console.log(chalk.green(result));
 
-            // db.Article.find({ title:result.title }).then(function (dbArticle) {
-            //     // if(dbArticle)
-            //     // console.log(chalk.blue(dbArticle));
-            //     // dbArticle.forEach(function (obj) {
-            //     //     if (obj.title != result.title) {
-            //     //         //Add each result to the database
-            //     //         db.Article.create(result).then(function (newArticle) {
-            //     //             console.log(chalk.red(newArticle));
-            //     //         }).catch(function (err) {
-            //     //             console.log(err);
-            //     //         });
-            //     //     }
-            //     // })
-            // })
-
-            //Add each result to the database
-            db.Article.create(result).then(function (dbArticle) {
-                // console.log(dbArticle);
-            }).catch(function (err) {
-                console.log(err);
+            db.Article.find({ title: result.title }).then(function (dbArticle) {
+                if (dbArticle.length) {
+                    return
+                } else {
+                    db.Article.create(result).then(function (newArticle) {
+                        // console.log(chalk.red(newArticle));
+                    }).catch(function (err) {
+                        console.log(err);
+                    });
+                }
             });
 
-            // console.log("=====================================");
-            // console.log(title);
-            // console.log(date);
-            // console.log(link);
-            // console.log(image);
-            // console.log("=====================================");
+            //Add each result to the database
+            // db.Article.create(result).then(function (dbArticle) {
+            //     console.log(dbArticle);
+            // }).catch(function (err) {
+            //     console.log(err);
+            // });
+
         });
+
+        Promise.resolve();
+    }).then(function () {
+        res.send("Scrape Complete");
     });
-    res.send("Scrape Complete");
 });
 
 
@@ -177,7 +171,9 @@ app.post("/note/:id", function (req, res) {
             //Update the Article to be associated with the new Note
             // { new: true } tells the query that we want it to return the updated User -- it returns the original by default
             // Since our mongoose query returns a promise, we can chain another `.then` which receives the result of the query
-            return db.Article.findOneAndUpdate({ _id: req.params.id }, { note: dbNote._id }, { new: true });
+            // return db.Article.findOneAndUpdate({ _id: req.params.id }, { note: dbNote._id }, { new: true });
+            return db.Article.updateOne({ _id: req.params.id }, { $push: { notes: dbNote._id } }, { new: true })
+            // Promise.resolve(db.Article.updateOne({ _id: req.params.id }, {$push: {notes: dbNote._id}}, { new: true }))
         })
         .then(function (dbArticle) {
             // If we were able to successfully update an Article, send it back to the client

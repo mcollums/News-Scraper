@@ -29,12 +29,13 @@
                     <a href="{{ this.link }}" class="btn btn-sm text-light btn-primary">Read on RT</a>
                     <a data-id="{{ this._id }}" class="btn btn-sm text-light btn-primary favBtn">Add to Favorites</a>
                     <a data-title="{{ this.title }}" data-id="{{ this._id }}"
-                        class="btn btn-sm text-light btn-primary noteBtn">Add a Note</a>
+                        class="btn btn-sm text-light btn-primary noteBtn" data-toggle="modal"
+                        data-target=".bd-example-modal-lg">Add a Note</a>
                 </div>
             </div>
             {{/each}}
         </div>
-        <div class="col-4" id="notes">
+        {{!-- <div class="col-4" id="notes">
             <div class="row" id="note-row">
                 <div id="note-col" class="col-9">
                     <h2 id="note-heading"></h2>
@@ -47,7 +48,34 @@
                     </form>
                 </div>
             </div>
+        </div> --}}
+    </div>
+
+    {{!-- New Note Modal --}}
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="row justify-content-center" id="note-row">
+                    <div id="note-col" class="col-9">
+                        <div class="modal-body">
+                            <h2 id="note-heading"></h2>
+                            <form id="add-note-form">
+                                <div class="form-group">
+                                    <label for="note-text-area">Write your Note Here...</label>
+                                    <textarea class="form-control" id="note-text-area" rows="5"></textarea>
+                                </div>
+                                <button id="submitNoteBtn" type="button" class="btn btn-primary">Add Note</button>
+                            </form>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                {{!-- <button id="submitNoteBtn" class="btn btn-primary">Add Note</button> --}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-<script type="text/javascript" src="/app.js"></script>
+{{!-- <script type="text/javascript" src="/app.js"></script> --}}
