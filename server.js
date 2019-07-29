@@ -30,6 +30,13 @@ app.engine("handlebars", exphbs({
 app.set("view engine", "handlebars");
 
 // connect to mongo db
+// var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/hw_scraper";
+// mongoose.connect(process.env.MONGODB_URI || "mongodb://<dbuser>:<dbpassword>@ds255917.mlab.com:55917/heroku_wbzbrn0s",
+// {
+//     useMongoClient: true,
+    
+// });
+// If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/hw_scraper";
 mongoose.connect(MONGODB_URI);
 var dbMon = mongoose.connection;
