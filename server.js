@@ -1,14 +1,11 @@
 
 var express = require("express");
-// const cheerio = require("cheerio");
-// const axios = require("axios");
 var mongoose = require("mongoose");
 var exphbs = require("express-handlebars");
-// const db = require("./models");
-// const chalk = require("chalk");
 
 
-var PORT = process.env.PORT || 3003;
+
+var PORT = process.env.PORT || 8080;
 
 // initialize express
 var app = express();
@@ -81,46 +78,7 @@ mongoose.connect(MONGODB_URI);
 // // =================Database Calls================
 // //function to scrape Rotten Tomatoes and get title, URL and description
 // // //route to list all scraped headlines
-// app.get("/scrape", function (req, res) {
-//     axios.get("https://editorial.rottentomatoes.com/").then(function (response) {
-//         var $ = cheerio.load(response.data);
-
-//         $("a.articleLink").each(function (i, element) {
-//             //Make a new object for each result from the articleLinks
-//             var result = {};
-
-//             result.title = $(element).find("p.title").text().trim();
-//             result.date = $(element).find("p.publication-date").text().trim();
-//             result.link = $(element).attr("href").trim();
-//             result.image = $(element).find(".editorialColumnPic").find("img").attr("src").trim();
-//             // console.log(chalk.green(result));
-
-//             db.Article.find({ title: result.title }).then(function (dbArticle) {
-//                 if (dbArticle.length) {
-//                     return
-//                 } else {
-//                     db.Article.create(result).then(function (newArticle) {
-//                         // console.log(chalk.red(newArticle));
-//                     }).catch(function (err) {
-//                         console.log(err);
-//                     });
-//                 }
-//             });
-
-//             //Add each result to the database
-//             // db.Article.create(result).then(function (dbArticle) {
-//             //     console.log(dbArticle);
-//             // }).catch(function (err) {
-//             //     console.log(err);
-//             // });
-
-//         });
-
-//         Promise.resolve();
-//     }).then(function () {
-//         res.send("Scrape Complete");
-//     });
-// });
+;
 
 
 // //Route to display all articles from the DB

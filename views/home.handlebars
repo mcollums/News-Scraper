@@ -12,14 +12,14 @@
     {{!-- Button Row --}}
     <div class="row justify-content-center" id="btn-row">
         <div class="col-6 text-center" id="btn-col">
-            <button type="button" id="scrapeBtn" class="btn btn-lg btn-primary">Scrape Articles</button>
-            <button type="button" id="clearBtn" class="btn btn-lg btn-primary">Clear Articles</button>
+            <button type="button"  class="scrapeBtn btn btn-lg btn-primary">Scrape Articles</button>
+            <button type="button" class="clearBtn btn btn-lg btn-primary">Clear Articles</button>
         </div>
     </div>
 
     {{!-- Articles/Notes Section --}}
     <div class="row" id="article-row">
-        <div class="col-8 articles" id="articles">
+        <div class="col-8 articles" id="articleContainer">
             {{#each article}}
             <div class="card article-card" style="width: 24rem;">
                 <img class="card-img-top" src="{{ this.image }}" alt="Card image cap">

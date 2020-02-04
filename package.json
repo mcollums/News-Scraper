@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "nodemon server.js",
     "lint": "eslint --quiet .",
     "main": "server.js",
     "fix": "eslint --fix .",
@@ -15,15 +15,12 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.19.0",
-    "chai": "^4.2.0",
     "chalk": "^2.4.2",
     "cheerio": "^1.0.0-rc.3",
-    "eslint": "^6.1.0",
     "express": "^4.17.1",
     "express-handlebars": "^3.1.0",
-    "mocha": "^6.2.0",
+    "handlebars": "^4.5.3",
     "mongoose": "^5.6.6",
-    "morgan": "^1.9.1",
     "nodemon": "^1.19.2"
   }
 }

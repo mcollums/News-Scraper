@@ -8,7 +8,8 @@ var ArticleSchema = new Schema({
     //Title is required and is a string
     title: {
         type: String,
-        required: true
+        required: true,
+        unique: {index: {unique: true}}
     },
     date: {
         type: String,
@@ -30,7 +31,10 @@ var ArticleSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "note"
     }],
-
+    date: {
+        type: Date,
+        default: Date.now
+    },
     favorite: {
         type: Boolean,
         default: false
