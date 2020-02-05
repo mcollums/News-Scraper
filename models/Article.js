@@ -11,7 +11,7 @@ var ArticleSchema = new Schema({
         required: true,
         unique: {index: {unique: true}}
     },
-    date: {
+    publication: {
         type: String,
         required: true
     },
@@ -26,7 +26,6 @@ var ArticleSchema = new Schema({
         required: false
     },
     //Note is an object that stores the Note Id
-    //
     notes: [{
         type: Schema.Types.ObjectId,
         ref: "note"
@@ -36,8 +35,8 @@ var ArticleSchema = new Schema({
         default: Date.now
     },
     favorite: {
-        type: Boolean,
-        default: false
+        type: String,
+        default: "false"
     }
 });
 

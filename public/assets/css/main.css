@@ -1,0 +1,17 @@
+#menu-aside {
+    height: 100vh;
+    min-width: 110px;
+}
+
+ul.navbar-nav {
+    padding-top: 20px;
+}
+
+footer {
+    font-size: 9pt;
+    color: rgb(128, 128, 128);
+}
+
+footer span {
+    margin-left: 35vw;
+}

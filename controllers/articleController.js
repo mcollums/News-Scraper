@@ -21,20 +21,21 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   makeFavorite: function (req,res) {
+    console.log("Inside Controller");
+    console.log(req.params);
     db.Article
-      .findByIdAndUpdate(
-        {_id: req.body.params.articleId}, 
-        {favorite: true}, 
+      .findOneAndUpdate(
+        {_id: req.params.articleId}, 
+        { $set: {favorite: req.body.saved }}, 
         { new: true})
       .then(function(article){
+        console.log(article);
         res.json(article)
       })
   },
   getNewArticles: function(req,res){
-    console.log("In the controller file")
     return scrape()
     .then(function(articles){
-      console.log(articles[0]);
       return db.Article.create(articles)
     })
     .then(function(dbRes){
@@ -56,7 +57,6 @@ module.exports = {
     });
   },
   clearArticles: function(req,res) {
-    console.log("Clear articles in controller");
     db.Article.remove({})
     .then(function() {
       return db.Note.remove({});

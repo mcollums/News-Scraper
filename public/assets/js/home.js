@@ -39,17 +39,25 @@ $(document).ready(function () {
 
 
     function handleFavorite(id) {
+        event.preventDefault();
+
         console.log("Favorite Button Clicked");
-        const articleId = id;
-        console.log("FavId: " + articleId);
+        // console.log($(this).children(".heartIcon"));
+        const articleInfo = $(this).parents(".article-card").data();
+        articleInfo.saved = true;
 
         $.ajax({
             method: "PUT",
-            url: "api/article/favorite/" + articleId
+            url: "api/article/" + articleInfo._id,
+            data: articleInfo
         }).then(function (data) {
-            console.log("favorite POST REQUEST: " + data);
+            console.log("Data after Put Request");
             // loadPage();
-            //TODO MAKE HEART NEXT TO ARTICLES
+            if (data.favorite === 'true') {
+                var dataTarget = $(`span[data-_id="${data._id}"`)
+                                    .removeClass('heart-false')
+                                    .addClass('heart-true');
+            }
         }).catch(function (err) {
             res.json(err);
         });
