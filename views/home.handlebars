@@ -1,13 +1,13 @@
 {{!-- Jumbotron Fluid --}}
-<div class="jumbotron jumbotron-fluid">
+<div class="jumbotron">
     <div class="container text-center">
-        <h1 class="display-4"> Rotten Tomatoes Scraper</h1>
+        <h1 class="display-4">Rotten Tomatoes Scraper</h1>
         <p class="lead">Scrape articles from Rotten Tomatoes, save your favorite and make notes!</p>
             {{!-- Button Row --}}
         <div class="row justify-content-center" id="btn-row">
             <div class="col-6 text-center d-flex justify-content-around" id="btn-col">
-                <button type="button"  class="scrapeBtn btn btn-lg btn-primary">Scrape Articles</button>
-                <button type="button" class="clearBtn btn btn-lg btn-primary">Clear Articles</button>
+                <button type="button"  class="scrapeBtn btn btn-lg btn-light">Scrape Articles</button>
+                <button type="button" class="clearBtn btn btn-lg btn-light">Clear Articles</button>
             </div>
         </div>
     </div>
@@ -25,15 +25,15 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ this.title }}</h5>
                     <p class="card-text">{{ this.publication }}</p>
-                    <a href="{{ this.link }}" class="btn btn-sm btn-outline-secondary">Read on RT</a>
-                    <a data-title="{{ this.title }}"
+                    <button href="{{ this.link }}" class="btn btn-sm btn-outline-secondary">Read on RT</button>
+                    <button data-title="{{ this.title }}"
                         class="btn btn-sm btn-outline-secondary noteBtn" data-toggle="modal"
-                        data-target=".bd-note-modal-lg">Add a Note</a>
-                    <a href="#"class="btn btn-sm btn-outline-secondary favBtn">
+                        data-target="#notes-modal">Add a Note</button>
+                    <button href="#"class="btn btn-sm btn-outline-secondary favBtn">
                         <span data-_id={{this._id}} class="heartIcon heart-{{ this.favorite }}">
                             <i class="fas fa-heart"></i>
                         </span>
-                    </a>
+                    </button>
                 </div>
             </div>
             {{/each}}
@@ -41,7 +41,7 @@
     </div>
 
     {{!-- New Note Modal --}}
-    <div class="modal fade bd-note-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    <div id="notes-modal" class="modal fade bd-note-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
@@ -71,5 +71,5 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
+{{!-- {{!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script> --}} --}}
 <script src="/assets/js/home.js"></script>

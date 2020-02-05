@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
-    $("#viewnotes").hide();
-    $("#addnotes").hide();
+    $("#viewNotes").hide();
+    $("#addNotes").hide();
     
     $("#articles").on("click", ".unfavBtn", function () {
         console.log("Unfavorite Button Clicked");

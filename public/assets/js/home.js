@@ -1,26 +1,12 @@
 $(document).ready(function () {
 
-    var articleCont = $('#articleContainer');
-
     $(document).on("click", ".scrapeBtn", handleScrape);
     $(document).on("click", ".clearBtn", handleClear);
     $(document).on("click", ".favBtn", handleFavorite);
+    $(document).on("click", ".noteBtn", handleNotes);
+    
 
-
-    // function loadPage() {
-    //     $.get("/api/article").then(function (data) {
-    //         articleCont.empty();
-    //         // If we have articles, render them to the page
-    //         if (data && data.length) {
-    //             // displayArticles(data);
-    //         } else {
-    //             // Otherwise render a message explaining we have no articles
-    //             //TODO ADD FEEDBACK FOR NO DATA
-    //             //   renderEmpty();
-    //         }
-    //     });
-    // };
-
+    //Calls the scrape API and reloads the page with new data
     function handleScrape() {
         console.log("Handle Scrape function")
         // This function handles the user clicking any "scrape new article" buttons
@@ -29,6 +15,7 @@ $(document).ready(function () {
         });
     };
 
+    //Calls the clear function and reloads with no data
     function handleClear() {
         console.log("Handle Clear function")
 
@@ -38,6 +25,7 @@ $(document).ready(function () {
     };
 
 
+    //Switches between Fav and Unfav on FrontEnd
     function handleFavorite(id) {
         event.preventDefault();
 
@@ -54,6 +42,7 @@ $(document).ready(function () {
                 .addClass(`heart-${!oldVal}`);     
     };
 
+    //Makes PUT request for Favorites based on IDs
     function putFavoriteinDB(artObj) {
         $.ajax({
             method: "PUT",
@@ -67,31 +56,11 @@ $(document).ready(function () {
     }
 
 
-
-    // function newCard(data) {
-    //     // This function takes in a single JSON object for an article/headline
-    //     // It constructs a jQuery element containing all of the formatted HTML for the
-    //     // article card
-    //     var card = $("<div class='card article-card'>");
-    //     var cardBody = $("<div class='card-body'>").append(
-    //         $("<h5 class='card-title'>").append(
-    //             $("<a class='article-link' target='_blank' rel='noopener noreferrer'>")
-    //                 .attr("href", article.url)
-    //                 .text(article.headline),
-    //             $("<a class='btn btn-sm text-light btn-primary tomato-btn'>Read on RT</a>")
-    //         )
-    //     );
-
-    //     var cardBody = $("<div class='card-body'>").text(article.summary);
-
-    //     card.append(cardHeader, cardBody);
-    //     // We attach the article's id to the jQuery element
-    //     // We will use this when trying to figure out which article the user wants to save
-    //     card.data("_id", article._id);
-    //     // We return the constructed card jQuery element
-    //     return card;
-    // }
-
+    function handleNotes() {
+        //The notes section shows up
+        $("#notes-modal").modal('show');
+        console.log("Note Button Clicked");
+    }
     // //When the user clicks to add a note for an article...
     // $(".articles").on("click", ".noteBtn", function () {
     //     //The notes section shows up

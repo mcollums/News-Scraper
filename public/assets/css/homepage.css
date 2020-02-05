@@ -1,5 +1,23 @@
+#main-cont {
+    position: relative;
+    left: 40px;
+    width: 90%;
+}
+
 .jumbotron {
     margin-bottom: 0;
+    background-image: url("../images/paper.png");
+    background-size: cover;
+    background-position: center;
+    color: white;
+}
+
+.jumbotron:first-child {
+    margin-left: 5vw;
+}
+
+.jumbotron h1 {
+    font-family: 'Pacifico', cursive;
 }
 
 #articleContainer {
