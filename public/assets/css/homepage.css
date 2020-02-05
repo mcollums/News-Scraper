@@ -2,10 +2,6 @@
     margin-bottom: 0;
 }
 
-/* .scrapeBtn {
-    margin: 0 10px;
-} */
-
 #articleContainer {
     padding: 10vh 4vw;
     display: flex;
@@ -16,6 +12,7 @@
 
 .article-card {
     width: 20vw;
+    margin-bottom: 5vh;
 }
 
 .btn-outline-secondary {

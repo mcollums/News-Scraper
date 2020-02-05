@@ -26,7 +26,7 @@ module.exports = {
     db.Article
       .findOneAndUpdate(
         {_id: req.params.articleId}, 
-        { $set: {favorite: req.body.saved }}, 
+        { $set: {favorite: req.body.fav }}, 
         { new: true})
       .then(function(article){
         console.log(article);

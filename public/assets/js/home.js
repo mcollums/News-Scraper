@@ -41,27 +41,30 @@ $(document).ready(function () {
     function handleFavorite(id) {
         event.preventDefault();
 
-        console.log("Favorite Button Clicked");
-        // console.log($(this).children(".heartIcon"));
         const articleInfo = $(this).parents(".article-card").data();
-        articleInfo.saved = true;
+        let oldVal = articleInfo.fav;
 
+        //Switching the boolean values with the !
+        articleInfo.fav = !oldVal;
+
+        putFavoriteinDB(articleInfo)
+        //Switching classes based on the boolean
+        $(`span[data-_id="${articleInfo._id}"`)
+                .removeClass(`heart-${oldVal}`)
+                .addClass(`heart-${!oldVal}`);     
+    };
+
+    function putFavoriteinDB(artObj) {
         $.ajax({
             method: "PUT",
-            url: "api/article/" + articleInfo._id,
-            data: articleInfo
+            url: "api/article/" + artObj._id,
+            data: artObj
         }).then(function (data) {
-            console.log("Data after Put Request");
-            // loadPage();
-            if (data.favorite === 'true') {
-                var dataTarget = $(`span[data-_id="${data._id}"`)
-                                    .removeClass('heart-false')
-                                    .addClass('heart-true');
-            }
+            console.log("Favorite Changed!")
         }).catch(function (err) {
             res.json(err);
         });
-    };
+    }
 
 
 

@@ -1,5 +1,5 @@
 #menu-aside {
-    height: 100vh;
+    height: auto;
     min-width: 110px;
 }
 
@@ -8,6 +8,7 @@ ul.navbar-nav {
 }
 
 footer {
+    height: 20px;
     font-size: 9pt;
     color: rgb(128, 128, 128);
 }
