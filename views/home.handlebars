@@ -3,19 +3,18 @@
     <div class="container text-center">
         <h1 class="display-4"> Rotten Tomatoes Scraper</h1>
         <p class="lead">Scrape articles from Rotten Tomatoes, save your favorite and make notes!</p>
+            {{!-- Button Row --}}
+        <div class="row justify-content-center" id="btn-row">
+            <div class="col-6 text-center d-flex justify-content-around" id="btn-col">
+                <button type="button"  class="scrapeBtn btn btn-lg btn-primary">Scrape Articles</button>
+                <button type="button" class="clearBtn btn btn-lg btn-primary">Clear Articles</button>
+            </div>
+        </div>
     </div>
 </div>
 
 {{!-- Main Body  --}}
 <div class="container-fluid" id="main-cont">
-
-    {{!-- Button Row --}}
-    <div class="row justify-content-center" id="btn-row">
-        <div class="col-6 text-center" id="btn-col">
-            <button type="button"  class="scrapeBtn btn btn-lg btn-primary">Scrape Articles</button>
-            <button type="button" class="clearBtn btn btn-lg btn-primary">Clear Articles</button>
-        </div>
-    </div>
 
     {{!-- Articles/Notes Section --}}
     <div class="row" id="article-row">
