@@ -57,6 +57,8 @@ $(document).ready(function(){
         const articleInfo = $(this).parents(".fav-card").data();
         const title = $(this).parents('.fav-card').find(".card-title").text();
 
+        $('#addNotes').find('.viewNotesBtn').attr("data-title", title);
+
         $('#submitNoteBtn').attr("data-_id", articleInfo._id)
         $('#addNotes').find('label')
             .html(`<h5>Add note for Article:</h5><p>"${title}"</p>`);
