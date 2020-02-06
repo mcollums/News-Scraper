@@ -26,9 +26,9 @@ var ArticleSchema = new Schema({
         required: false
     },
     //Note is an object that stores the Note Id
-    notes: [{
+    note: [{
         type: Schema.Types.ObjectId,
-        ref: "note"
+        ref: "Note"
     }],
     date: {
         type: Date,

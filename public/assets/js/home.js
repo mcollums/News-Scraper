@@ -3,7 +3,7 @@ $(document).ready(function () {
     $(document).on("click", ".scrapeBtn", handleScrape);
     $(document).on("click", ".clearBtn", handleClear);
     $(document).on("click", ".favBtn", handleFavorite);
-    $(document).on("click", ".noteBtn", handleNotes);
+    $(document).on("click", ".addNoteBtn", handleNotes);
     
 
     //Calls the scrape API and reloads the page with new data
@@ -26,7 +26,7 @@ $(document).ready(function () {
 
 
     //Switches between Fav and Unfav on FrontEnd
-    function handleFavorite(id) {
+    function handleFavorite() {
         event.preventDefault();
 
         const articleInfo = $(this).parents(".article-card").data();

@@ -7,29 +7,24 @@ module.exports = {
     db.Article
       .find()
       .then(function(dbModel){
-            console.log("FOUND ITEMS IN CONTROLLER");
             res.json(dbModel)
-
-            // res.render("index", hbsObject);
         })
       .catch(err => res.status(422).json(err));
   },
   findArticleById: function (req, res) {
     db.Article
       .findById(req.params.articleId)
+      .populate("note")
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   makeFavorite: function (req,res) {
-    console.log("Inside Controller");
-    console.log(req.params);
     db.Article
       .findOneAndUpdate(
         {_id: req.params.articleId}, 
         { $set: {favorite: req.body.fav }}, 
         { new: true})
       .then(function(article){
-        console.log(article);
         res.json(article)
       })
   },

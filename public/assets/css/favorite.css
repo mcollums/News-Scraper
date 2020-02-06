@@ -1,0 +1,13 @@
+.jumbotron {
+    background-image: url("../images/bluePaper.png");
+}
+
+.fav-card {
+    width: 25vw;
+    margin-bottom: 5vh;
+}
+
+#addNotes {
+    margin-top: 35px;
+}
+

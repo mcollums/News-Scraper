@@ -10,21 +10,22 @@
 <div class="container-fluid main-cont">
 
     {{!-- Articles/Notes Section --}}
-    <div class="row" id="article-row">
-        <div class="col-8" id="articles">
+    <div class="row article-row">
+        <div class="col-md articles articleContainer">
             {{#each article}}
-            <div class="card article-card" style="width: 24rem;">
+            <div class="card fav-card" data-_id="{{ this._id }}" data-fav="{{ this.favorite }}">
                 <img class="card-img-top" src="{{ this.image }}" alt="Card image cap">
                 <div class="card-body">
                     <h5 class="card-title">{{ this.title }}</h5>
                     <p class="card-text">{{ this.publication }}</p>
-                    <a href="{{ this.link }}" class="btn btn-sm text-light btn-primary">Read on RT</a>
-                    <a data-id="{{ this._id }}" class="btn btn-sm text-light btn-primary unfavBtn">Remove from
-                        favorite</a>
-                    <a data-title="{{ this.title }}" data-id="{{ this._id }}"
-                        class="btn btn-sm text-light btn-primary viewNoteBtn">View Notes</a>
-                    <a data-title="{{ this.title }}" data-id="{{ this._id }}"
-                        class="btn btn-sm text-light btn-primary addNoteBtn">Add Notes</a>
+                    <button href="{{ this.link }}" class="btn btn-sm btn-outline-secondary">Read on RT</button>
+                    <button data-title="{{ this.title }}" class="btn btn-sm btn-outline-secondary addNoteBtn">Add a
+                        Note</button>
+                    <button href="#" class="btn btn-sm btn-outline-secondary favBtn">
+                        <span data-_id={{this._id}} class="heartIcon heart-{{ this.favorite }}">
+                            <i class="fas fa-heart"></i>
+                        </span>
+                    </button>
                 </div>
             </div>
             {{/each}}
@@ -33,31 +34,30 @@
             <div class="row note-row" id="view-note-row">
                 <div id="note-col" class="col-9">
                     {{!-- <h2 id="note-heading"></h2> --}}
+                    <h5>Title</h5>
+                    <p>Body Body Body Body</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-4 note-section" id="addNotes">
+            <div class="row note-row" id="add-note-row">
+                <div id="note-col" class="col-9">
+                    <h2 id="note-heading"></h2>
                     <form action="submit">
                         <div class="form-group">
-                            <label for="note-text-area">Write your Note Here...</label>
+                            <label id="labelTitle" for="note-text-area"></label>
                             <textarea class="form-control" id="note-text-area" rows="5"></textarea>
                         </div>
-                        <button id="submitNoteBtn" class="btn btn-primary">Submit</button>
+                        <button id="submitNoteBtn" class="btn btn-outline-secondary">Submit</button>
+                        <button class="btn btn-outline-secondary viewNotesBtn">View Notes</button>
+                        <button id="doneAddNotes" class="btn btn-outline-secondary">Done</button>
                     </form>
+                    <p class="dbMessage"></p>
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-4 note-section" id="addNotes">
-        <div class="row note-row" id="add-note-row">
-            <div id="note-col" class="col-9">
-                <h2 id="note-heading"></h2>
-                <form action="submit">
-                    <div class="form-group">
-                        <label for="note-text-area">Write your Note Here...</label>
-                        <textarea class="form-control" id="note-text-area" rows="5"></textarea>
-                    </div>
-                    <button id="submitNoteBtn" class="btn btn-primary">Submit</button>
-                </form>
-            </div>
-        </div>
-    </div>
+
 </div>
 </div>
 

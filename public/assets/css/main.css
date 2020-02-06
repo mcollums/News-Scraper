@@ -41,7 +41,6 @@ ul.navbar-nav {
 
 .jumbotron {
     margin-bottom: 0;
-    background-image: url("../images/redPaper.png");
     background-size: cover;
     background-position: center;
     color: white;
@@ -56,28 +55,27 @@ ul.navbar-nav {
 }
 
 /* ARTICLES STYLING */
-#articleContainer {
+.articleContainer {
     padding: 10vh 4vw;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-around;
-}
-
-.article-card {
-    width: 20vw;
-    margin-bottom: 5vh;
+    justify-content: space-between;
 }
 
 .btn-outline-secondary {
     color: #666 !important;
-    font-size: 12px;
+    font-size: 14px;
     border-radius: 15px;
 }
 
 .btn-outline-secondary:hover {
     color: white !important;
     box-shadow: 0px 1.5px 2px #686868;
+}
+
+.favBtn {
+    border-radius: 50%;
 }
 
 .heart-false {

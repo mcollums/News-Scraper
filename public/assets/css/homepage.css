@@ -1,3 +1,12 @@
+.jumbotron {
+    background-image: url("../images/redPaper.png");
+}
+
 #btn-col {
     margin-Top: 10px;
+}
+
+.article-card {
+    width: 20vw;
+    margin-bottom: 5vh;
 }

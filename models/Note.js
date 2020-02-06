@@ -4,7 +4,11 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 //Using this schema constructor, create a new NoteSchema object
-var NoteSchema = new Schema ({
+var NoteSchema = new Schema({
+    // date: {
+    //     type: Date,
+    //     default: Date.now
+    // },
     body: String
 });
 
