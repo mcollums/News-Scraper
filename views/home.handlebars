@@ -2,7 +2,8 @@
 <div class="jumbotron">
     <div class="container text-center">
         <h1 class="display-4">Rotten Tomatoes Scraper</h1>
-        <p class="lead">Scrape articles from Rotten Tomatoes, save your favorites then make notes on the Favorites Page.</p>
+        <p class="lead">Scrape articles from Rotten Tomatoes, save your favorites then make notes on the Favorites Page.
+        </p>
         {{!-- Button Row --}}
         <div class="row justify-content-center" id="btn-row">
             <div class="col-6 text-center d-flex justify-content-around" id="btn-col">
@@ -24,7 +25,9 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ this.title }}</h5>
                     <p class="card-text">{{ this.publication }}</p>
-                    <button href="{{ this.link }}" class="btn btn-sm btn-outline-secondary"> Read on RT </button>
+                    <a href="{{ this.link }}">
+                        <button class="btn btn-sm btn-outline-secondary">Read on RT</button>
+                    </a>
                     <button href="#" class="btn btn-sm btn-outline-secondary favBtn">
                         <span data-_id={{this._id}} class="heartIcon heart-{{ this.favorite }}">
                             <i class="fas fa-heart"></i>

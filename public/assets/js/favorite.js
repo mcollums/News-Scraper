@@ -6,11 +6,13 @@ $(document).ready(function(){
 
     $(document).on("click", "#doneAddNotes", function() {
         event.preventDefault();
+        $('#dbMessage').empty();
         $("#addNotes").hide();
     });
 
     $(document).on("click", "#note-view-toggle", function() {
         event.preventDefault();
+        $('#dbMessage').empty();
         $("#viewNotes").hide();
     });
 
@@ -77,7 +79,7 @@ $(document).ready(function(){
             }
         }).then(function (data) {
             $('#note-text-area').val("");
-            $('#addNotes').find('.dbMessage').text(`Note Posted: "${data.note[data.note.length - 1].body}"... Add Another?`)
+            $('#dbMessage').text(`Note Posted: "${data.note[data.note.length - 1].body}"... Add Another?`)
         }).catch(function (err) {
             res.json(err);
         });
@@ -111,7 +113,6 @@ $(document).ready(function(){
             </li>
           `)
         }
-
     }
 
 });

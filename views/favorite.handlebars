@@ -18,7 +18,9 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ this.title }}</h5>
                     <p class="card-text">{{ this.publication }}</p>
-                    <button href="{{ this.link }}" class="btn btn-sm btn-outline-secondary">Read on RT</button>
+                    <a href="{{ this.link }}">
+                        <button class="btn btn-sm btn-outline-secondary">Read on RT</button>
+                    </a>
                     <button data-title="{{ this.title }}" class="btn btn-sm btn-outline-secondary addNoteBtn">Add
                         Note</button>
                         <button data-title="{{ this.title }}" class="btn btn-sm btn-outline-secondary viewNotesBtn">View
@@ -61,7 +63,7 @@
                         <button class="btn btn-outline-secondary viewNotesBtn">View Notes</button>
                         <button id="doneAddNotes" class="btn btn-outline-secondary">Done</button>
                     </form>
-                    <p class="dbMessage"></p>
+                    <p id="dbMessage"></p>
                 </div>
             </div>
         </div>
