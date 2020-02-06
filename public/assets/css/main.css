@@ -56,7 +56,7 @@ ul.navbar-nav {
 
 /* ARTICLES STYLING */
 .articleContainer {
-    padding: 10vh 4vw;
+    padding: 10vh 3vw;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;

@@ -18,6 +18,13 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
+  findArticleByTitle: function (req, res) {
+    db.Article
+      .find({title: req.params.articleTitle})
+      .populate("note")
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
   makeFavorite: function (req,res) {
     db.Article
       .findOneAndUpdate(

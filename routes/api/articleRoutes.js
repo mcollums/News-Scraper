@@ -10,6 +10,10 @@ router.route("/scrape")
 router.route("/clear")
   .get(articleController.clearArticles)
 
+// Matches with "/api/article/title/:title"
+router.route("/title/:articleTitle")
+  .get(articleController.findArticleByTitle)
+
 // Matches with "/api/article/:id"
 router.route("/:articleId")
   .get(articleController.findArticleById)

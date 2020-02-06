@@ -2,9 +2,19 @@ $(document).ready(function(){
     $(document).on("click", ".favBtn", handleFavorite);
     $(document).on("click", ".addNoteBtn", handleShowInput);
     $(document).on("click", "#submitNoteBtn", handleNewNote);
+    $(document).on("click", ".viewNotesBtn", handleGetNotes);
 
+    $(document).on("click", "#doneAddNotes", function() {
+        event.preventDefault();
+        $("#addNotes").hide();
+    });
 
+    $(document).on("click", "#note-view-toggle", function() {
+        event.preventDefault();
+        $("#viewNotes").hide();
+    });
 
+    
     $("#viewNotes").hide();
     $("#addNotes").hide();
     
@@ -72,10 +82,42 @@ $(document).ready(function(){
             $('#addNotes').find('.dbMessage').text(`Note Posted! - "${data.note[data.note.length - 1].body}". Add Another?`)
         }).catch(function (err) {
             res.json(err);
-        })
+        });
     }
 
-})
+    function handleGetNotes() {
+        event.preventDefault();
+        $("#addNotes").hide();
+        $("#viewNotes").show();
+
+        //Put title in All Notes Section
+        const articleTitle = $(this).data('title');
+        $('#note-section-title').text(articleTitle);
+
+        $.ajax({
+            method: "GET",
+            url: "api/article/title/" + articleTitle
+        }).then(function(data){
+            console.log(data[0].note);
+            appendNotes(data[0].note);
+        }).catch(function (err) {
+            res.json(err);
+        });
+    }
+
+    function appendNotes(notes) {
+        var location = $('#notes-wrapper').find('ul');
+        for(var i = 0; i <= notes.length-1; i++) {
+            location.append(`
+            <li>
+                <h7> ${notes[i].body} </h7>
+            </li>
+          `)
+        }
+
+    }
+
+});
 
 
 

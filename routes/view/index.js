@@ -19,6 +19,8 @@ router.get("/favorite", function(req, res) {
   db.Article.find({ favorite: true })
     .sort({ date: -1 })
     .then(function(dbArticles) {
+      console.log(dbArticles.note)
+      
       res.render("favorite", { 
         article: dbArticles,
         style: 'favorite.css',

@@ -19,8 +19,10 @@
                     <h5 class="card-title">{{ this.title }}</h5>
                     <p class="card-text">{{ this.publication }}</p>
                     <button href="{{ this.link }}" class="btn btn-sm btn-outline-secondary">Read on RT</button>
-                    <button data-title="{{ this.title }}" class="btn btn-sm btn-outline-secondary addNoteBtn">Add a
+                    <button data-title="{{ this.title }}" class="btn btn-sm btn-outline-secondary addNoteBtn">Add
                         Note</button>
+                        <button data-title="{{ this.title }}" class="btn btn-sm btn-outline-secondary viewNotesBtn">View
+                            Notes</button>
                     <button href="#" class="btn btn-sm btn-outline-secondary favBtn">
                         <span data-_id={{this._id}} class="heartIcon heart-{{ this.favorite }}">
                             <i class="fas fa-heart"></i>
@@ -33,9 +35,14 @@
         <div class="col-4 note-section" id="viewNotes">
             <div class="row note-row" id="view-note-row">
                 <div id="note-col" class="col-9">
-                    {{!-- <h2 id="note-heading"></h2> --}}
-                    <h5>Title</h5>
-                    <p>Body Body Body Body</p>
+                    
+                    <h2 id="note-heading">All Notes For: </h2>
+                    <h4 id="note-view-toggle">&times</h4>
+                    <br><br>
+                    <h5 id="note-section-title"></h5>
+                    <div id="notes-wrapper">
+                        <ul></ul>
+                    </div>
                 </div>
             </div>
         </div>

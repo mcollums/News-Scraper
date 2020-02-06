@@ -3,7 +3,7 @@
 }
 
 .fav-card {
-    width: 25vw;
+    width: 26vw;
     margin-bottom: 5vh;
 }
 
@@ -11,3 +11,27 @@
     margin-top: 35px;
 }
 
+#viewNotes {
+    margin-top: 35px;
+}
+
+#note-heading {
+    float: left;
+}
+
+#note-view-toggle {
+    padding: 0px 8px;
+    float: right;
+    color: rgb(133, 133, 133);
+}
+
+#note-view-toggle:hover {
+    border: 1px solid #666;
+    border-radius: 50%;
+}
+
+#note-view-toggle:active {
+    color: red;
+    border: 1px solid red;
+    border-radius: 50%;
+}
