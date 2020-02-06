@@ -79,7 +79,8 @@ $(document).ready(function(){
                 body: noteBody
             }
         }).then(function (data) {
-            $('#addNotes').find('.dbMessage').text(`Note Posted! - "${data.note[data.note.length - 1].body}". Add Another?`)
+            $('#note-text-area').val("");
+            $('#addNotes').find('.dbMessage').text(`Note Posted: "${data.note[data.note.length - 1].body}"... Add Another?`)
         }).catch(function (err) {
             res.json(err);
         });

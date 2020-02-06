@@ -8,11 +8,15 @@
 }
 
 #addNotes {
-    margin-top: 35px;
+    margin-top: 10vh;
+}
+
+.dbMessage {
+    padding-top: 20px;
 }
 
 #viewNotes {
-    margin-top: 35px;
+    padding-top: 10vh;
 }
 
 #note-heading {
