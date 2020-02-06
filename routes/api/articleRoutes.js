@@ -19,8 +19,4 @@ router.route("/:articleId")
   .get(articleController.findArticleById)
   .put(articleController.makeFavorite)
 
-// Matches with "/api/article"
-router.route("/")
-  .get(articleController.findAllArticles)
-
 module.exports = router;

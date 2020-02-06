@@ -14,13 +14,11 @@ router.get("/", function(req, res) {
     });
 });
 
-// This route renders the favorite handlebars page
+// This route renders the favorite page
 router.get("/favorite", function(req, res) {
   db.Article.find({ favorite: true })
     .sort({ date: -1 })
-    .then(function(dbArticles) {
-      console.log(dbArticles.note)
-      
+    .then(function(dbArticles) {      
       res.render("favorite", { 
         article: dbArticles,
         style: 'favorite.css',

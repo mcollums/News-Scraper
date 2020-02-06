@@ -23,7 +23,6 @@ $(document).ready(function(){
         event.preventDefault();
 
         const articleInfo = $(this).parents(".fav-card").data();
-        console.log(articleInfo);
         let oldVal = articleInfo.fav;
 
         //Switching the boolean values with the !
@@ -42,8 +41,6 @@ $(document).ready(function(){
             method: "PUT",
             url: "api/article/" + artObj._id,
             data: artObj
-        }).then(function (data) {
-            console.log("Favorite Changed!")
         }).catch(function (err) {
             res.json(err);
         });
@@ -99,7 +96,6 @@ $(document).ready(function(){
             method: "GET",
             url: "api/article/title/" + articleTitle
         }).then(function(data){
-            console.log(data[0].note);
             appendNotes(data[0].note);
         }).catch(function (err) {
             res.json(err);

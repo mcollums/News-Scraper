@@ -22,12 +22,10 @@ var scrape = function() {
                     link: link,
                     image: image
                 }
-
                 articlesArr.push(newArticle);
             }
         });
         return articlesArr;
-
     });
 };
 

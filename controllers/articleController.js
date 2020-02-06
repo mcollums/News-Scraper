@@ -3,13 +3,28 @@ var scrape = require("../scripts/scrape");
 
 
 module.exports = {
-  findAllArticles: function (req, res) {
-    db.Article
-      .find()
-      .then(function(dbModel){
-            res.json(dbModel)
-        })
-      .catch(err => res.status(422).json(err));
+  getNewArticles: function(req,res){
+    return scrape()
+    .then(function(articles){
+      return db.Article.create(articles)
+    })
+    .then(function(dbRes){
+      if (dbRes.length === 0){
+        res.json({
+          message: "Sorry, no new articles! Check back soon."
+        });
+      }
+      else {
+        res.json({
+          message: "Added " + dbRes.length + " Articles to the Database"
+        });
+      }
+    })
+    .catch(function(err) {
+      res.json({
+        message: "Scrape complete!!"
+      });
+    });
   },
   findArticleById: function (req, res) {
     db.Article
@@ -34,29 +49,6 @@ module.exports = {
       .then(function(article){
         res.json(article)
       })
-  },
-  getNewArticles: function(req,res){
-    return scrape()
-    .then(function(articles){
-      return db.Article.create(articles)
-    })
-    .then(function(dbRes){
-      if (dbRes.length === 0){
-        res.json({
-          message: "Sorry, no new articles! Check back soon."
-        });
-      }
-      else {
-        res.json({
-          message: "Added " + dbRes.length + " Articles to the Database"
-        });
-      }
-    })
-    .catch(function(err) {
-      res.json({
-        message: "Scrape complete!!"
-      });
-    });
   },
   clearArticles: function(req,res) {
     db.Article.remove({})
